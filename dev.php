@@ -23,7 +23,8 @@ return [
     "DOC"=>[
         [
             'ROOT'=>EASYSWOOLE_ROOT.'/Doc/Cn',
-            'DEFAULT'=>true
+            'DEFAULT'=>true,
+            'domain'=>'www.easyswoole.com'
         ]
     ]
 ];
