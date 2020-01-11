@@ -4,10 +4,12 @@
 namespace App\Utility\Markdown;
 
 
-class ParserResult
+use EasySwoole\Spl\SplBean;
+
+class ParserResult extends SplBean
 {
-    private $config;
-    private $html;
+    protected $config;
+    protected $html;
 
     /**
      * @return mixed
