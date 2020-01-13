@@ -38,7 +38,7 @@ class Index extends Controller
         }
         $result = Parser::parserToHtml($filePath);
 
-        if ($this->request()->getMethod() != 'GET') {
+        if ($this->request()->getMethod() == 'POST') {
             $this->writeJson(Status::CODE_OK, $result, 'success');
         } else {
             $this->response()->withStatus(Status::CODE_OK);
