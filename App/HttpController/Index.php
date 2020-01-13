@@ -34,15 +34,16 @@ class Index extends Controller
                 $file = EASYSWOOLE_ROOT . '/src/Resource/Http/404.html';
             }
             $this->response()->write(file_get_contents($file));
+            return true;
         }
-
         $result = Parser::parserToHtml($filePath);
 
-        if ($this->request()->getMethod() == 'GET') {
+        if ($this->request()->getMethod() != 'GET') {
             $this->writeJson(Status::CODE_OK, $result, 'success');
         } else {
             $this->response()->withStatus(Status::CODE_OK);
             $this->response()->write($result->getHtml());
+            \EasySwoole\Utility\File::createFile(EASYSWOOLE_ROOT.'/Temp/'.$path,$result->getHtml());
         }
     }
 }
