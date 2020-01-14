@@ -1,24 +1,3 @@
----
-title: swoole如何对ip限制访问频率
-meta:
-  - name: description
-    content: swoole|swoole学习笔记|swoole Ip访问限制
-  - name: keywords
-    content: easyswoole|swoole|swoole学习笔记|swoole Ip访问限制
-link:
-  - rel: stylesheet
-    type: text/css    
-    href: theme.css
-  - rel: stylesheet
-    type: text/css    
-    href: theme22.css
-script:
-  - type: text/javascript
-    src: https://track.uc.cn/uaest.js   
-  - type: text/javascript
-    src: https://track.uc.cn/222.js   
-  - content: console.log(1);
----
 
 
 # swoole如何对ip限制访问频率

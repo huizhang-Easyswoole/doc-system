@@ -74,7 +74,8 @@ class Index extends Controller
         //获取配置项
         $config = $result->getConfig();
         if (empty($config)) {
-            $config = Parser::parserToHtml("{$docPath}/{$lan}/globalConfig.md");
+            $globalConfigResult = Parser::parserToHtml("{$docPath}/{$lan}/globalConfig.md");
+            $config = $globalConfigResult->getConfig();
         }
 
         $configHtml = $this->getConfigHtml($config);
