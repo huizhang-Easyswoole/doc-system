@@ -96,8 +96,6 @@ class Index extends Controller
             'script'=>array_merge($config['script']??[],$globalConfig['script']??[]),
         ];
 
-        var_dump($config);
-
         //script style
         foreach ($config as $key => $item) {
             if (in_array($key, ['title'])) {
