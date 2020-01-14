@@ -14,7 +14,7 @@ class Parser
 
         $file = fopen($path, "r");
         $isInHead = false;
-        while(!feof($file))
+        while(is_resource($file)&&!feof($file))
         {
             $line = fgets($file);
             if($isInHead){
@@ -39,4 +39,5 @@ class Parser
         return $result;
 
     }
+
 }
