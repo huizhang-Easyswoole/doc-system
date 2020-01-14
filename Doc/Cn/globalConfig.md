@@ -8,8 +8,8 @@ meta:
 link:
   - rel: stylesheet
     type: text/css    
-    href: theme.css
+    href: 1.css
   - rel: stylesheet
     type: text/css    
-    href: theme22.css
+    href: 2.css
 ---

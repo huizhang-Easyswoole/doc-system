@@ -73,12 +73,10 @@ class Index extends Controller
 
         //获取配置项
         $config = $result->getConfig();
-        if (empty($config)) {
-            $globalConfigResult = Parser::parserToHtml("{$docPath}/{$lan}/globalConfig.md");
-            $config = $globalConfigResult->getConfig();
-        }
+        $globalConfigResult = Parser::parserToHtml("{$docPath}/{$lan}/globalConfig.md");
+        $globalConfig = $globalConfigResult->getConfig();
 
-        $configHtml = $this->getConfigHtml($config);
+        $configHtml = $this->getConfigHtml($config,$globalConfig);
         $html = str_replace(['{$header}', '{$nav}', '{$sidebar}', '{$content}', '{$footer}', '{$lan}'], [$configHtml . $header, $nav, $sideBarResult->getHtml(), $result->getHtml(), $footer, $lan], $global);
 
         $this->response()->withAddedHeader('Content-type', 'text/html; charset=utf-8');
@@ -87,12 +85,19 @@ class Index extends Controller
     }
 
 
-    protected function getConfigHtml($config)
+    protected function getConfigHtml($config,$globalConfig)
     {
-        if (empty($config)) {
-            return '';
-        }
         $html = "";
+        $config = [
+            'title'=>$config['title']??$globalConfig['title']??'',
+            'meta'=>$config['meta']??$globalConfig['meta']??[],
+            'base'=>array_merge($config['base']??[],$globalConfig['base']??[]),
+            'link'=>array_merge($config['link']??[],$globalConfig['link']??[]),
+            'script'=>array_merge($config['script']??[],$globalConfig['script']??[]),
+        ];
+
+        var_dump($config);
+
         //script style
         foreach ($config as $key => $item) {
             if (in_array($key, ['title'])) {
