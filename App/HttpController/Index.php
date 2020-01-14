@@ -79,7 +79,7 @@ class Index extends Controller
         }
 
         $configHtml = $this->getConfigHtml($config);
-        $html = str_replace(['{$header}', '{$nav}', '{$sidebar}', '{$content}', '{$footer}', '{$lan}'], [$configHtml.$header, $nav, $sideBarResult->getHtml(), $result->getHtml(), $footer, $lan], $global);
+        $html = str_replace(['{$header}', '{$nav}', '{$sidebar}', '{$content}', '{$footer}', '{$lan}'], [$configHtml . $header, $nav, $sideBarResult->getHtml(), $result->getHtml(), $footer, $lan], $global);
 
         $this->response()->withAddedHeader('Content-type', 'text/html; charset=utf-8');
         $this->response()->withStatus(Status::CODE_OK);
@@ -89,14 +89,17 @@ class Index extends Controller
 
     protected function getConfigHtml($config)
     {
+        if (empty($config)) {
+            return '';
+        }
         $html = "";
         //script style
         foreach ($config as $key => $item) {
-            if (in_array($key,['title'])){
+            if (in_array($key, ['title'])) {
                 //只有content的标签
                 $html .= "<{$key}>{$item}</{$key}>";
-            }else{
-                if (in_array($key, ['meta','link','base'])) {
+            } else {
+                if (in_array($key, ['meta', 'link', 'base'])) {
                     foreach ($item as $value) {
                         $html .= "<{$key}";
                         foreach ($value as $propertyKey => $propertyValue) {
@@ -106,19 +109,19 @@ class Index extends Controller
                         $html .= "/>";
                         $html .= "\n";;
                     }
-                }else{
+                } else {
                     //style和script标签
                     foreach ($item as $value) {
                         $html .= "<{$key}";
                         foreach ($value as $propertyKey => $propertyValue) {
-                            if ($propertyKey=='content'){
+                            if ($propertyKey == 'content') {
                                 continue;
                             }
                             //多重标签
                             $html .= " $propertyKey=\"{$propertyValue}\"";
                         }
 
-                        $html .= ">".($value['content']??'')."</$key>";
+                        $html .= ">" . ($value['content'] ?? '') . "</$key>";
                         $html .= "\n";;
                     }
                 }
