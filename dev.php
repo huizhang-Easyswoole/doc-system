@@ -10,7 +10,9 @@ return [
         'SETTING'        => [
             'worker_num'    => 8,
             'reload_async'  => true,
-            'max_wait_time' => 3
+            'max_wait_time' => 3,
+            'document_root' => EASYSWOOLE_ROOT.'/Static/',
+            'enable_static_handler' => true,
         ],
         'TASK'           => [
             'workerNum'     => 4,
@@ -19,11 +21,5 @@ return [
         ]
     ],
     'TEMP_DIR'    => null,
-    'LOG_DIR'     => null,
-    "DOC"         => [
-        'PATH'    => EASYSWOOLE_ROOT . '/Doc',
-        'ROOT'    => EASYSWOOLE_ROOT . '/Doc/Cn',
-        'DEFAULT' => true,
-        'domain'  => 'www.easyswoole.com'
-    ]
+    'LOG_DIR'     => null
 ];
