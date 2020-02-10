@@ -59,6 +59,7 @@ class Parser
     static function handelHtml($html)
     {
         $dom = HtmlDomParser::str_get_html($html);
+        //处理链接类标签
         $aList = $dom->find('a');
         /**
          * @var $a SimpleHtmlDom
@@ -70,6 +71,12 @@ class Parser
             } else {
                 $a->setAttribute("target", "_blank");
             }
+        }
+
+        //处理h类标签
+        $hList = $dom->find('h1,h2,h3,h4,h5,h6');
+        foreach ($hList as $h) {
+            $h->setAttribute('id',$h->getNode()->textContent);
         }
 
         return $dom->html();
