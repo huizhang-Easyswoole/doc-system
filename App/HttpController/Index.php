@@ -6,45 +6,64 @@ namespace App\HttpController;
 
 use App\Utility\HtmlTemplateBuilder;
 use App\Utility\Markdown\Parser;
-use App\Utility\Markdown\ParserResult;
 use EasySwoole\EasySwoole\Config;
 use EasySwoole\Http\AbstractInterface\Controller;
 use EasySwoole\Http\Message\Status;
 
 class Index extends Controller
 {
+    public $language;
+
+    /*
+    * 语言自动识别
+    */
+    protected function onRequest(?string $action): ?bool
+    {
+        $lan = $this->request()->getCookieParams('language');
+        if(empty($lan)){
+            $lan = $this->request()->getRequestParam('language');
+        }
+        if(empty($lan)){
+            //从用户浏览器ua的accept encode 识别
+        }
+        if($lan == 'En'){
+            $this->language = 'En';
+        }else{
+            $this->language = 'Cn';
+        }
+        return true;
+    }
 
     function index()
     {
-        $file = EASYSWOOLE_ROOT . '/vendor/easyswoole/easyswoole/src/Resource/Http/welcome.html';
-        if (!is_file($file)) {
-            $file = EASYSWOOLE_ROOT . '/src/Resource/Http/welcome.html';
+        $file = EASYSWOOLE_ROOT."/Static/{$this->language}_index.html";
+        if(file_exists($file)){
+            $this->response()->withAddedHeader('Content-type', 'text/html; charset=utf-8');
+            $this->response()->withStatus(Status::CODE_OK);
+            $this->response()->write(file_get_contents($file));
+        }else{
+            $this->response()->write("language {$this->language} is not support yet");
         }
-        $this->response()->write(file_get_contents($file));
     }
 
     protected function actionNotFound(?string $action)
     {
+        $lan = $this->language;
+        $this->language = null;
         $path = $this->request()->getUri()->getPath();
         if (substr($path,-5) =='.html'){
             $filePath = rtrim($path, "html") . 'md';
-            $lanStr = substr($path, 1, 2);
-            if ($lanStr == 'Cn') {
-                $lan = 'Cn';
-            } elseif ($lanStr == 'En') {
-                $lan = 'En';
-            } else {
-                $lan = 'Cn';
-                $filePath = "/{$lan}".$filePath;
-            }
+            $filePath = "/{$lan}".$filePath;
             $filePath = Config::getInstance()->getConf('DOC.PATH') . $filePath;
             if (file_exists($filePath)) {
-                $result = Parser::mdFile2Html($filePath);
+                $markdownInfo = Parser::mdFile2Html($filePath);
                 if ($this->request()->getMethod() == 'POST') {
-                    $this->writeJson(Status::CODE_OK, $result, 'success');
+                    $this->writeJson(Status::CODE_OK, $markdownInfo, 'success');
                 } else {
                     //处理全部的html
-                    $this->html($result, $lan);
+                    $this->response()->withAddedHeader('Content-type', 'text/html; charset=utf-8');
+                    $this->response()->withStatus(Status::CODE_OK);
+                    $this->response()->write(HtmlTemplateBuilder::build($markdownInfo,$lan));
                 }
             }else{
                 $this->response()->withStatus(Status::CODE_NOT_FOUND);
@@ -52,12 +71,5 @@ class Index extends Controller
         }else{
             $this->response()->withStatus(Status::CODE_NOT_FOUND);
         }
-    }
-
-    protected function html(ParserResult $result, $lan)
-    {
-        $this->response()->withAddedHeader('Content-type', 'text/html; charset=utf-8');
-        $this->response()->withStatus(Status::CODE_OK);
-        $this->response()->write(HtmlTemplateBuilder::build($result,$lan));
     }
 }
