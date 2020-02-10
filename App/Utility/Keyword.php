@@ -11,7 +11,6 @@ namespace App\Utility;
 use App\Utility\Markdown\Parser;
 use EasySwoole\EasySwoole\Config;
 use EasySwoole\Utility\File;
-use mysql_xdevapi\BaseResult;
 use voku\helper\HtmlDomParser;
 use voku\helper\SimpleHtmlDom;
 
@@ -44,7 +43,6 @@ class Keyword
         $jsonPath = EASYSWOOLE_ROOT.'/Static/keyword.json';
 
         File::createFile($jsonPath,json_encode($jsonList));
-        var_dump($jsonList);
     }
 
     static function getSidebar($lan = 'Cn')

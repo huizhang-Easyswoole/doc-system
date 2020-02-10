@@ -41,7 +41,8 @@ class Parser
         return $result;
     }
 
-    public static function getHtml($path){
+    public static function getHtml($path)
+    {
         $result = self::parserToHtml($path);
         $result->setHtml(self::handelHtml($result->getHtml()));
         return $result;
@@ -63,8 +64,8 @@ class Parser
          * @var $a SimpleHtmlDom
          */
         foreach ($aList as $a) {
-            $a->href = self:: changeLink($a->href);
             $info = pathinfo($a->href);
+            var_dump($info);
             if (isset($info['extension']) && ($info['extension'] == 'md')) {
                 $a->href = self:: changeLink($a->href);
             } else {
