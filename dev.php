@@ -18,7 +18,7 @@ return [
             'timeout'       => 15
         ]
     ],
-    'TEMP_DIR'    => null,
+    'TEMP_DIR'    => '/tmp/es',
     'LOG_DIR'     => null,
     "DOC"         => [
         'PATH'    => EASYSWOOLE_ROOT . '/Doc',
