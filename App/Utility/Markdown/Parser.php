@@ -9,38 +9,33 @@ use voku\helper\SimpleHtmlDom;
 
 class Parser
 {
-    protected static function parserMdFile(string $path): ParserResult
+    public static function parserMdFile(string $path): ParserResult
     {
         $result = new ParserResult();
         $content = '';
         $head = '';
         $file = fopen($path, "r");
         $isInHead = false;
-        $i=0;
         while (is_resource($file) && !feof($file)) {
             $line = fgets($file);
             if ($isInHead) {
-                if (strlen(trim($line))==3&&substr($line, 0, 3) == '---') {
+                if (strlen(trim($line))==3 && substr($line, 0, 3) == '---') {
                     $isInHead = false;
                 } else {
                     $head = $head . $line;
                 }
             } else {
-                if (!empty($head)){
-                    continue;
-                }
-                if (strlen(trim($line))==3&&substr($line, 0, 3) == '---') {
+                if (strlen(trim($line))==3 && substr($line, 0, 3) == '---') {
                     $isInHead = true;
                 } else {
                     $content = $content . $line;
                 }
             }
-            $i++;
         }
         fclose($file);
         $result->setConfig(yaml_parse($head));
         $parsedown = new \Parsedown();
-        $html = $parsedown->text($content);
+        $html = $parsedown->text($content);;
         $result->setHtml($html);
         return $result;
     }
