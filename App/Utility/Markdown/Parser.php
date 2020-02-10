@@ -14,24 +14,28 @@ class Parser
         $result = new ParserResult();
         $content = '';
         $head = '';
-
         $file = fopen($path, "r");
         $isInHead = false;
+        $i=0;
         while (is_resource($file) && !feof($file)) {
             $line = fgets($file);
             if ($isInHead) {
-                if (substr($line, 0, 3) == '---') {
+                if (strlen(trim($line))==3&&substr($line, 0, 3) == '---') {
                     $isInHead = false;
                 } else {
                     $head = $head . $line;
                 }
             } else {
-                if (substr($line, 0, 3) == '---') {
+                if (!empty($head)){
+                    continue;
+                }
+                if (strlen(trim($line))==3&&substr($line, 0, 3) == '---') {
                     $isInHead = true;
                 } else {
                     $content = $content . $line;
                 }
             }
+            $i++;
         }
         fclose($file);
         $result->setConfig(yaml_parse($head));

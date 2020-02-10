@@ -23,7 +23,11 @@ class Keyword
 {
     static function cacheKeyword()
     {
-        $lan = 'Cn';
+        self::genJson('Cn');
+        self::genJson("En");
+    }
+
+    static function genJson($lan){
         $jsonList = [];
         $sidebarHtml = self::getSidebar($lan);
         $dom = HtmlDomParser::str_get_html($sidebarHtml);
@@ -40,7 +44,7 @@ class Keyword
                 'child' => self::getChildKeyword($path, $lan)
             ];
         }
-        $jsonPath = EASYSWOOLE_ROOT.'/Static/keyword.json';
+        $jsonPath = EASYSWOOLE_ROOT."/Static/keyword{$lan}.json";
 
         File::createFile($jsonPath,json_encode($jsonList));
     }
