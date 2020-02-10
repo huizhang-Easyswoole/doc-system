@@ -26,6 +26,10 @@ class Index extends Controller
     protected function actionNotFound(?string $action)
     {
         $path = $this->request()->getUri()->getPath();
+        if (substr($path,-5)!='.html'){
+            $this->return404();
+            return true;
+        }
         $lanStr = substr($path, 1, 2);
 
         if ($lanStr == 'Cn') {
@@ -47,7 +51,7 @@ class Index extends Controller
             $this->response()->write(file_get_contents($file));
             return true;
         }
-        $result = Parser::parserToHtml($filePath);
+        $result = Parser::getHtml($filePath);
 
         if ($this->request()->getMethod() == 'POST') {
             $this->writeJson(Status::CODE_OK, $result, 'success');
@@ -64,7 +68,7 @@ class Index extends Controller
 
         $sidebarPath = "{$docPath}/{$lan}/sidebar.md";
         //获取sideBar的parserHtml
-        $sideBarResult = Parser::parserToHtml($sidebarPath);
+        $sideBarResult = Parser::getHtml($sidebarPath);
         //获取其他模板数据
         $header = file_get_contents("{$docPath}/{$lan}/header.tpl");
         $nav = file_get_contents("{$docPath}/{$lan}/nav.tpl");
@@ -73,7 +77,7 @@ class Index extends Controller
 
         //获取配置项
         $config = $result->getConfig();
-        $globalConfigResult = Parser::parserToHtml("{$docPath}/{$lan}/globalConfig.md");
+        $globalConfigResult = Parser::getHtml("{$docPath}/{$lan}/globalConfig.md");
         $globalConfig = $globalConfigResult->getConfig();
 
         $configHtml = $this->getConfigHtml($config,$globalConfig);
@@ -133,5 +137,16 @@ class Index extends Controller
         }
         return $html;
     }
+
+
+    protected function return404(){
+        $this->response()->withStatus(Status::CODE_NOT_FOUND);
+        $file = EASYSWOOLE_ROOT . '/vendor/easyswoole/easyswoole/src/Resource/Http/404.html';
+        if (!is_file($file)) {
+            $file = EASYSWOOLE_ROOT . '/src/Resource/Http/404.html';
+        }
+        $this->response()->write(file_get_contents($file));
+    }
+
 
 }
