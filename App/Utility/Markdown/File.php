@@ -22,6 +22,4 @@ class File
         $filePath = Config::getInstance()->getConf('DOC.PATH') . $filePath;
         return $filePath;
     }
-
-
 }

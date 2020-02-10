@@ -2,7 +2,7 @@
 namespace EasySwoole\EasySwoole;
 
 
-use App\Utility\Keyword;
+use App\Utility\DocKeyworldsParser;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\Http\Request;
@@ -16,7 +16,7 @@ class EasySwooleEvent implements Event
         // TODO: Implement initialize() method.
         date_default_timezone_set('Asia/Shanghai');
         //每次初始化的时候更新keyword
-        Keyword::cacheKeyword();
+        DocKeyworldsParser::scan();
     }
 
     public static function mainServerCreate(EventRegister $register)

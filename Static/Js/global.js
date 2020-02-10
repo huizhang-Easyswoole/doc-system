@@ -1,3 +1,4 @@
+//全局js代码
 //百度统计
 var _hmt = _hmt || [];
 (function() {

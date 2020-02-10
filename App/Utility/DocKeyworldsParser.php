@@ -19,15 +19,15 @@ use voku\helper\SimpleHtmlDom;
  * Class Keyword
  * @package App\Utility
  */
-class Keyword
+class DocKeyworldsParser
 {
-    static function cacheKeyword()
+    static function scan()
     {
-        self::genJson('Cn');
-        self::genJson("En");
+        self::parserFiles2JsonUrlMap('Cn');
+        self::parserFiles2JsonUrlMap("En");
     }
 
-    static function genJson($lan){
+    protected static function parserFiles2JsonUrlMap($lan){
         $jsonList = [];
         $sidebarHtml = self::getSidebar($lan);
         $dom = HtmlDomParser::str_get_html($sidebarHtml);
@@ -40,28 +40,28 @@ class Keyword
             $name = $a->getNode()->textContent;
             $jsonList[] = [
                 'name'  => $name,
-                'path'  => Parser::changeLink($path),
-                'child' => self::getChildKeyword($path, $lan)
+                'path'  => Parser::mdLink2Html($path),
+                'child' => self::parserHtmlKeyWorld($path, $lan)
             ];
         }
         $jsonPath = EASYSWOOLE_ROOT."/Static/keyword{$lan}.json";
 
-        File::createFile($jsonPath,json_encode($jsonList));
+        File::createFile($jsonPath,json_encode($jsonList,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE));
     }
 
-    static function getSidebar($lan = 'Cn')
+    protected static function getSidebar($lan = 'Cn')
     {
         $docPath = Config::getInstance()->getConf('DOC.PATH');
 
         $sidebarPath = "{$docPath}/{$lan}/sidebar.md";
         //获取sideBar的parserHtml
-        $sideBarResult = Parser::parserToHtml($sidebarPath);
+        $sideBarResult = Parser::mdFile2Html($sidebarPath);
         $html = $sideBarResult->getHtml();
         return $html;
     }
 
 
-    static function getChildKeyword($path, $lan = 'Cn')
+    protected static function parserHtmlKeyWorld($path, $lan = 'Cn')
     {
         $keywordList = [];
         //获取页面的所有关键字
@@ -70,7 +70,7 @@ class Keyword
         if (!file_exists($filePath)) {
             return null;
         }
-        $result = Parser::parserToHtml($filePath);
+        $result = Parser::mdFile2Html($filePath);
         $html = $result->getHtml();
 
         $dom = HtmlDomParser::str_get_html($html);
@@ -78,7 +78,7 @@ class Keyword
         foreach ($hList as $h) {
             $keywordList[] = [
                 'name' => $h->getNode()->textContent,
-                'path' => Parser::changeLink($path) . "#" . $h->getNode()->textContent,
+                'path' => Parser::mdLink2Html($path) . "#" . $h->getNode()->textContent,
             ];
         }
         return $keywordList;

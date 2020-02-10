@@ -9,7 +9,7 @@ use voku\helper\SimpleHtmlDom;
 
 class Parser
 {
-    public static function parserToHtml(string $path): ParserResult
+    protected static function parserMdFile(string $path): ParserResult
     {
         $result = new ParserResult();
         $content = '';
@@ -45,10 +45,10 @@ class Parser
         return $result;
     }
 
-    public static function getHtml($path)
+    public static function mdFile2Html($path)
     {
-        $result = self::parserToHtml($path);
-        $result->setHtml(self::handelHtml($result->getHtml()));
+        $result = self::parserMdFile($path);
+        $result->setHtml(self::htmlLinkHandel($result->getHtml()));
         return $result;
     }
 
@@ -60,7 +60,7 @@ class Parser
      * @author tioncico
      * Time: 下午2:55
      */
-    static function handelHtml($html)
+    protected static function htmlLinkHandel($html)
     {
         $dom = HtmlDomParser::str_get_html($html);
         //处理链接类标签
@@ -71,7 +71,7 @@ class Parser
         foreach ($aList as $a) {
             $info = pathinfo($a->href);
             if (isset($info['extension']) && ($info['extension'] == 'md')) {
-                $a->href = self:: changeLink($a->href);
+                $a->href = self:: mdLink2Html($a->href);
             } else {
                 $a->setAttribute("target", "_blank");
             }
@@ -86,7 +86,7 @@ class Parser
         return $dom->html();
     }
 
-    static function changeLink($link)
+    static function mdLink2Html($link)
     {
         if (substr($link, -3) == '.md') {
             return substr($link, 0, -3) . '.html';

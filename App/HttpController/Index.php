@@ -31,7 +31,6 @@ class Index extends Controller
             return true;
         }
         $lanStr = substr($path, 1, 2);
-
         if ($lanStr == 'Cn') {
             $lan = 'Cn';
         } elseif ($lanStr == 'En') {
@@ -51,7 +50,7 @@ class Index extends Controller
             $this->response()->write(file_get_contents($file));
             return true;
         }
-        $result = Parser::getHtml($filePath);
+        $result = Parser::mdFile2Html($filePath);
 
         if ($this->request()->getMethod() == 'POST') {
             $this->writeJson(Status::CODE_OK, $result, 'success');
@@ -68,20 +67,19 @@ class Index extends Controller
 
         $sidebarPath = "{$docPath}/{$lan}/sidebar.md";
         //获取sideBar的parserHtml
-        $sideBarResult = Parser::getHtml($sidebarPath);
+        $sideBarResult = Parser::mdFile2Html($sidebarPath);
         //获取其他模板数据
-        $header = file_get_contents("{$docPath}/{$lan}/header.tpl");
         $nav = file_get_contents("{$docPath}/{$lan}/nav.tpl");
         $footer = file_get_contents("{$docPath}/{$lan}/footer.tpl");
         $global = file_get_contents("{$docPath}/global.tpl");
 
         //获取配置项
         $config = $result->getConfig();
-        $globalConfigResult = Parser::getHtml("{$docPath}/{$lan}/globalConfig.md");
+        $globalConfigResult = Parser::mdFile2Html("{$docPath}/{$lan}/globalConfig.md");
         $globalConfig = $globalConfigResult->getConfig();
 
-        $configHtml = $this->getConfigHtml($config,$globalConfig);
-        $html = str_replace(['{$header}', '{$nav}', '{$sidebar}', '{$content}', '{$footer}', '{$lan}'], [$configHtml . $header, $nav, $sideBarResult->getHtml(), $result->getHtml(), $footer, $lan], $global);
+        $configHtml = $this->configToHtml($config,$globalConfig);
+        $html = str_replace(['{$header}', '{$nav}', '{$sidebar}', '{$content}', '{$footer}', '{$lan}'], [$configHtml , $nav, $sideBarResult->getHtml(), $result->getHtml(), $footer, $lan], $global);
 
         $this->response()->withAddedHeader('Content-type', 'text/html; charset=utf-8');
         $this->response()->withStatus(Status::CODE_OK);
@@ -89,7 +87,7 @@ class Index extends Controller
     }
 
 
-    protected function getConfigHtml($config,$globalConfig)
+    protected function configToHtml($config, $globalConfig)
     {
         $html = "";
         $config = [

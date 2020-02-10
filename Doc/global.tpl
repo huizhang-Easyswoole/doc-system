@@ -1,11 +1,25 @@
 <html lang="{$lan}">
 <head>
-    {$header}
+<link rel="stylesheet" type="text/css" href="/Css/doc.css">
+<script rel="script" src="/Js/global.js"></script>
+{$header}
 </head>
 <body>
-    <div class="navBar">{$nav}</div>
-    <div class="sideBar">{$sidebar}</div>
-    <div class="content">{$content}</div>
-    <div class="footer">{$footer}</div>
+    <!-- navBar -->
+    <div class="navBar">
+        {$nav}
+    </div>
+    <!-- sideBar -->
+    <div class="sideBar">
+        {$sidebar}
+    </div>
+    <!-- content -->
+    <div class="content">
+        {$content}
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        {$footer}
+    </div>
 </body>
 </html>
