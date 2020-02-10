@@ -9,7 +9,7 @@ use voku\helper\SimpleHtmlDom;
 
 class Parser
 {
-    public static function parserMdFile(string $path): ParserResult
+    public static function html(string $path): ParserResult
     {
         $result = new ParserResult();
         $content = '';
@@ -40,9 +40,9 @@ class Parser
         return $result;
     }
 
-    public static function mdFile2Html($path)
+    public static function htmlWithLinkHandel($path)
     {
-        $result = self::parserMdFile($path);
+        $result = self::html($path);
         $result->setHtml(self::htmlLinkHandel($result->getHtml()));
         return $result;
     }

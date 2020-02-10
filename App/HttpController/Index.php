@@ -56,7 +56,7 @@ class Index extends Controller
             $filePath = "/{$lan}".$filePath;
             $filePath = Config::getInstance()->getConf('DOC.PATH') . $filePath;
             if (file_exists($filePath)) {
-                $markdownInfo = Parser::mdFile2Html($filePath);
+                $markdownInfo = Parser::htmlWithLinkHandel($filePath);
                 if ($this->request()->getMethod() == 'POST') {
                     $this->writeJson(Status::CODE_OK, $markdownInfo, 'success');
                 } else {

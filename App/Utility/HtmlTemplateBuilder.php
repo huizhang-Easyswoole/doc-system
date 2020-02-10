@@ -15,14 +15,14 @@ class HtmlTemplateBuilder
         $docPath = Config::getInstance()->getConf('DOC.PATH');
         $sidebarPath = "{$docPath}/{$lan}/sidebar.md";
         //获取sideBar的parserHtml
-        $sideBarResult = Parser::mdFile2Html($sidebarPath);
+        $sideBarResult = Parser::htmlWithLinkHandel($sidebarPath);
         //获取其他模板数据
         $nav = file_get_contents("{$docPath}/{$lan}/nav.tpl");
         $footer = file_get_contents("{$docPath}/{$lan}/footer.tpl");
         $global = file_get_contents("{$docPath}/global.tpl");
         //获取配置项
         $config = $result->getConfig();
-        $globalConfigResult = Parser::mdFile2Html("{$docPath}/{$lan}/globalConfig.md");
+        $globalConfigResult = Parser::htmlWithLinkHandel("{$docPath}/{$lan}/globalConfig.md");
         $globalConfig = $globalConfigResult->getConfig();
         $configHtml = self::headConfig2Html($config,$globalConfig);
         return str_replace(['{$header}', '{$nav}', '{$sidebar}', '{$content}', '{$footer}', '{$lan}'], [$configHtml , $nav, $sideBarResult->getHtml(), $result->getHtml(), $footer, $lan], $global);

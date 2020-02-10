@@ -23,9 +23,6 @@ return [
     'TEMP_DIR'    => '/tmp/es',
     'LOG_DIR'     => null,
     "DOC"         => [
-        'PATH'    => EASYSWOOLE_ROOT . '/Doc',
-        'ROOT'    => EASYSWOOLE_ROOT . '/Doc/Cn',
-        'DEFAULT' => true,
-        'domain'  => 'www.easyswoole.com'
+        'PATH'    => EASYSWOOLE_ROOT . '/Doc'
     ]
 ];

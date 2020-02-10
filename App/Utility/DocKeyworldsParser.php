@@ -55,7 +55,7 @@ class DocKeyworldsParser
 
         $sidebarPath = "{$docPath}/{$lan}/sidebar.md";
         //获取sideBar的parserHtml
-        $sideBarResult = Parser::mdFile2Html($sidebarPath);
+        $sideBarResult = Parser::html($sidebarPath);
         $html = $sideBarResult->getHtml();
         return $html;
     }
@@ -66,11 +66,12 @@ class DocKeyworldsParser
         $keywordList = [];
         //获取页面的所有关键字
         $docPath = Config::getInstance()->getConf('DOC.PATH');
-        $filePath = "{$docPath}/$lan/{$path}";
+        //这边的path已经存在了/斜杆
+        $filePath = "{$docPath}/$lan{$path}";
         if (!file_exists($filePath)) {
             return null;
         }
-        $result = Parser::mdFile2Html($filePath);
+        $result = Parser::htmlWithLinkHandel($filePath);
         $html = $result->getHtml();
 
         $dom = HtmlDomParser::str_get_html($html);
