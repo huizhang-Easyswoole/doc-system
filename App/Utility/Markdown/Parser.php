@@ -65,7 +65,6 @@ class Parser
          */
         foreach ($aList as $a) {
             $info = pathinfo($a->href);
-            var_dump($info);
             if (isset($info['extension']) && ($info['extension'] == 'md')) {
                 $a->href = self:: changeLink($a->href);
             } else {
