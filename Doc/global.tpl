@@ -15,6 +15,7 @@
 <body>
     <!-- navBar -->
     <div class="navBar">
+        <img src="/Images/docNavLogo.png" class="navBarLogo">
         {$nav}
     </div>
     <!-- sideBar -->

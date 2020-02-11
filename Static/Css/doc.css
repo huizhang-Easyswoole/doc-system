@@ -19,6 +19,12 @@ body{
     box-sizing: border-box;
     border-bottom: 1px solid #eaecef;
 }
+.navBarLogo{
+    height: 2.2rem;
+    min-width: 2.2rem;
+    margin-right: 0.8rem;
+    vertical-align: top;
+}
 .sideBar{
     font-size: 16px;
     background-color: #fff;
