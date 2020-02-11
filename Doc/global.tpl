@@ -1,36 +1,41 @@
+<!doctype html>
 <html lang="{$lan}">
 <head>
-<link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="/Css/doc.css">
-<link rel="stylesheet" type="text/css" href="/Css/markdown.css">
-<link rel="stylesheet" type="text/css" href="/Css/prettify.css">
-<link rel="stylesheet" type="text/css" href="/Css/prism.css">
-<script rel="script" src="/Js/global.js"></script>
-<script rel="script" src="/Js/prettify.js"></script>
-<script rel="script" src="/Js/prism.js"></script>
-<script rel="script" src="/Js/jquery.mark.min.js"></script>
-{$header}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/Css/document.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/zenburn.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/highlight.js/9.18.1/highlight.min.js"></script>
+    {$header}
 </head>
 <body>
-    <!-- navBar -->
-    <div class="navBar">
-        <img src="/Images/docNavLogo.png" class="navBarLogo">
-        {$nav}
-    </div>
-    <!-- sideBar -->
-    <div class="sideBar">
-        {$sidebar}
-    </div>
-    <!-- content -->
-    <div class="mainBody">
-        <div class="mainBodyContent">
-            {$content}
-        </div>
-    </div>
-    <!-- footer -->
-    <div class="footer">
-        {$footer}
-    </div>
+<div class="container">
+    <header class="navBar">
+        <div class="navInner"><img src="/Images/docNavLogo.png" alt=""></div>
+    </header>
+    <aside class="sideBar">{$sidebar}</aside>
+    <section class="mainContent">
+        <div class="content markdown-body">{$content}</div>
+        <div class="footer">{$footer}</div>
+    </section>
+</div>
+
+<script>
+    $(function () {
+
+        // 监听菜单点击事件
+        $(".sideBar ul>li").on('click', function () {
+            $.each($(".sideBar ul>li"), function () {
+                $(this).removeClass('active')
+            });
+            $(this).addClass('active')
+        });
+
+        hljs.initHighlightingOnLoad();
+
+    })
+</script>
 </body>
 </html>
