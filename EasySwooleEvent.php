@@ -3,6 +3,7 @@ namespace EasySwoole\EasySwoole;
 
 
 use App\Utility\DocKeyworldsParser;
+use App\Utility\GitSyncProcess;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\Http\Request;
@@ -15,13 +16,12 @@ class EasySwooleEvent implements Event
     {
         // TODO: Implement initialize() method.
         date_default_timezone_set('Asia/Shanghai');
-        //每次初始化的时候更新keyword
-        DocKeyworldsParser::scan();
     }
 
     public static function mainServerCreate(EventRegister $register)
     {
-        // TODO: Implement mainServerCreate() method.
+        $process = new GitSyncProcess('GitSyncProcess');
+        ServerManager::getInstance()->getSwooleServer()->addProcess($process->getProcess());
     }
 
     public static function onRequest(Request $request, Response $response): bool
