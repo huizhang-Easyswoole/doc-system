@@ -713,7 +713,7 @@ body {
 }
 .container .mainContent .markdown-body .highlight pre,
 .container .mainContent .markdown-body pre {
-  background-color: #0c0d0e;
+  background-color: #282c34;
   border-radius: 3px;
   font-size: 85%;
   line-height: 1.45;

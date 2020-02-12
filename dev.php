@@ -23,6 +23,8 @@ return [
     'TEMP_DIR'    => '/tmp/es',
     'LOG_DIR'     => null,
     "DOC"         => [
-        'PATH'    => EASYSWOOLE_ROOT . '/Doc'
+        'PATH'    => EASYSWOOLE_ROOT . '/Doc',
+        "LANGUAGE" => ["Cn"],
+        "DEFAULT_LANGUAGE"=>"Cn"
     ]
 ];

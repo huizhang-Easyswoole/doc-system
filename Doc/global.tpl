@@ -6,8 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/Css/document.css">
     <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/zenburn.min.css">
+    <link rel="stylesheet" href="/Css/markdown.css">
     <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/highlight.js/9.18.1/highlight.min.js"></script>
+    <script src="/Js/global.js"></script>
+    <script src="/Js/jquery.mark.min.js"></script>
     {$header}
 </head>
 <body>
@@ -18,7 +21,6 @@
     <aside class="sideBar">{$sidebar}</aside>
     <section class="mainContent">
         <div class="content markdown-body">{$content}</div>
-        <div class="footer">{$footer}</div>
     </section>
 </div>
 
