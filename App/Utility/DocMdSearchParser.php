@@ -46,7 +46,7 @@ class DocMdSearchParser
                 'id'  => $id,
                 'title'  => $name,
                 'content'  => self::getMdContent($path),
-                'link'  => $path,
+                'link'  => Parser::mdLink2Html($path),
             ];
             $id++;
         }
