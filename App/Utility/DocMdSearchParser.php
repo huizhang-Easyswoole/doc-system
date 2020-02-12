@@ -23,8 +23,10 @@ class DocMdSearchParser
 {
     static function scan()
     {
-        self::parserFiles2JsonUrlMap('Cn');
-        self::parserFiles2JsonUrlMap("En");
+        $list = Config::getInstance()->getConf('DOC.LANGUAGE');
+        foreach ($list as $lan){
+            self::parserFiles2JsonUrlMap($lan);
+        }
     }
 
     protected static function parserFiles2JsonUrlMap($lan){
