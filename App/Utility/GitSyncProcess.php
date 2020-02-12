@@ -16,7 +16,7 @@ class GitSyncProcess extends AbstractProcess
                 /*
                  * 这边需要执行  git pull
                  */
-                DocKeyworldsParser::scan();
+                DocMdSearchParser::scan();
                 \co::sleep(10);
             }
         });
