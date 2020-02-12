@@ -12,6 +12,7 @@
     - [HTTP部分](/Video/http.md)
     - [数据库部分](/Video/database.md)
     - [其他额外部分](/Video/other.md)
+    - [视频教程模板](/Video/template.md)
 - 快速开始
     - [环境要求](/QuickStart/environment.md)
     - [框架安装](/QuickStart/install.md)
