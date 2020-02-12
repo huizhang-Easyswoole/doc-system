@@ -23,8 +23,10 @@ class DocKeyworldsParser
 {
     static function scan()
     {
-        self::parserFiles2JsonUrlMap('Cn');
-        self::parserFiles2JsonUrlMap("En");
+        $list = Config::getInstance()->getConf('DOC.LANGUAGE');
+        foreach ($list as $lan){
+            self::parserFiles2JsonUrlMap($lan);
+        }
     }
 
     protected static function parserFiles2JsonUrlMap($lan){
@@ -61,7 +63,7 @@ class DocKeyworldsParser
     }
 
 
-    protected static function parserHtmlKeyWorld($path, $lan = 'Cn')
+    protected static function parserHtmlKeyWorld($path, $lan)
     {
         $keywordList = [];
         //获取页面的所有关键字

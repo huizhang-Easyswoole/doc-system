@@ -26,10 +26,11 @@ class Index extends Controller
         if(empty($lan)){
             //从用户浏览器ua的accept encode 识别
         }
-        if($lan == 'En'){
+        $allow = Config::getInstance()->getConf('DOC.LANGUAGE');
+        if(in_array($lan,$allow,true)){
             $this->language = 'En';
         }else{
-            $this->language = 'Cn';
+            $this->language = Config::getInstance()->getConf("DOC.DEFAULT_LANGUAGE");
         }
         return true;
     }
@@ -71,5 +72,10 @@ class Index extends Controller
         }else{
             $this->response()->withStatus(Status::CODE_NOT_FOUND);
         }
+    }
+
+    function keyWorldSearch()
+    {
+
     }
 }

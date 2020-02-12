@@ -14,7 +14,7 @@ class ParserResult extends SplBean
     /**
      * @return mixed
      */
-    public function getConfig()
+    public function getConfig():array
     {
         return $this->config;
     }
@@ -22,8 +22,11 @@ class ParserResult extends SplBean
     /**
      * @param mixed $config
      */
-    public function setConfig($config): void
+    public function setConfig(?array $config): void
     {
+        if(empty($config)){
+            $config = [];
+        }
         $this->config = $config;
     }
 
