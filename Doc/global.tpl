@@ -10,12 +10,9 @@
     <link rel="stylesheet" href="/Css/markdown.css">
     <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/highlight.js/9.18.1/highlight.min.js"></script>
+    <script src="https://cdn.staticfile.org/js-cookie/2.2.1/js.cookie.min.js"></script>
     <script src="/Js/global.js"></script>
     <script src="/Js/jquery.mark.min.js"></script>
-    <script src="/Js/lunr.min.js"></script>
-    <script src="/Js/lunr.stemmer.support.js"></script>
-    <script src="/Js/lunr.tinyseg.js"></script>
-    <script src="/Js/lunr.zhcn.js"></script>
     {$header}
 </head>
 <body>
@@ -35,10 +32,11 @@
                             <span class="title">Language</span> <span class="arrow right"></span>
                         </button>
                         <ul class="nav-dropdown" style="display: none;">
-                            <li class="dropdown-item"><!----> <a href="/"
-                                                                 class="nav-link router-link-exact-active router-link-active">简体中文</a>
+                            <li class="dropdown-item">
+                                <a href="javascript:void(0)" data-lang="Cn" class="nav-link lang-change">简体中文</a>
                             </li>
-                            <li class="dropdown-item"><!----> <a href="/En/" class="nav-link">ENGLISH</a></li>
+                            <li class="dropdown-item"><a href="javascript:void(0)" data-lang="En"
+                                                         class="nav-link lang-change">ENGLISH</a></li>
                         </ul>
                     </div>
                 </div>
@@ -158,6 +156,25 @@
         $('#resultList').on('mousedown', function (e) {
             e.preventDefault();
         });
+
+        // 切换中英文
+        $('.dropdown-title').click(function (e) {
+            $('.nav-dropdown').toggle();
+        })
+
+        $('.lang-change').click(function (e) {
+            var lang = $(this).data('lang');
+            Cookies.set('language', lang);
+            window.location.reload();
+        });
+
+        // 自动展开菜单父级
+        $.each($('.sideBar ul li a'), function () {
+            if ( $(this).attr('href') === window.location.pathname ) {
+                console.warn($(this).parents('li').last().addClass('active'));
+            }
+        })
+
 
     })
 </script>

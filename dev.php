@@ -24,7 +24,7 @@ return [
     'LOG_DIR'     => null,
     "DOC"         => [
         'PATH'    => EASYSWOOLE_ROOT . '/Doc',
-        "LANGUAGE" => ["Cn"],
+        "LANGUAGE" => ["Cn","En"],
         "DEFAULT_LANGUAGE"=>"Cn"
     ]
 ];

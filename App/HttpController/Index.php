@@ -28,7 +28,7 @@ class Index extends Controller
         }
         $allow = Config::getInstance()->getConf('DOC.LANGUAGE');
         if(in_array($lan,$allow,true)){
-            $this->language = 'En';
+            $this->language = $lan;
         }else{
             $this->language = Config::getInstance()->getConf("DOC.DEFAULT_LANGUAGE");
         }

@@ -43,12 +43,12 @@ body {
   display: -webkit-box;
   display: flex;
 }
-.container .navBar .navSearch {
+.container .navBar .navInnerRight .navSearch {
   display: inline-block;
   position: relative;
   margin-right: 1rem;
 }
-.container .navBar .navSearch .resultList {
+.container .navBar .navInnerRight .navSearch .resultList {
   position: absolute;
   border: 1px solid #eaecef;
   background: #FFFFFF;
@@ -59,28 +59,28 @@ body {
   max-height: 500px;
   overflow-y: scroll;
 }
-.container .navBar .navSearch .resultList .resultItem {
+.container .navBar .navInnerRight .navSearch .resultList .resultItem {
   padding: 0.4em;
   border-radius: 0.3em;
   border-bottom: 1px dashed #eeeeee;
 }
-.container .navBar .navSearch .resultList .resultItem:last-child {
+.container .navBar .navInnerRight .navSearch .resultList .resultItem:last-child {
   border-bottom: none;
 }
-.container .navBar .navSearch .resultList .resultItem:hover {
+.container .navBar .navInnerRight .navSearch .resultList .resultItem:hover {
   background: #eeeeee;
 }
-.container .navBar .navSearch .resultList .resultItem .resultLink {
+.container .navBar .navInnerRight .navSearch .resultList .resultItem .resultLink {
   display: block;
   text-decoration: none;
   line-height: 1.5em;
 }
-.container .navBar .navSearch .resultList .resultItem .resultLink .resultTitle {
+.container .navBar .navInnerRight .navSearch .resultList .resultItem .resultLink .resultTitle {
   color: #1b1f23;
   font-weight: 700;
   font-size: 1em;
 }
-.container .navBar .navSearch .resultList .resultItem .resultLink .resultDesc {
+.container .navBar .navInnerRight .navSearch .resultList .resultItem .resultLink .resultDesc {
   color: #3d454d;
   font-weight: 400;
   font-size: 0.9em;
@@ -89,10 +89,10 @@ body {
   overflow: hidden;
   -webkit-line-clamp: 1;
 }
-.container .navBar .navSearch .resultList .resultItem .resultLink .resultDesc .searchKeyword {
+.container .navBar .navInnerRight .navSearch .resultList .resultItem .resultLink .resultDesc .searchKeyword {
   color: #ff0561;
 }
-.container .navBar .navSearch input {
+.container .navBar .navInnerRight .navSearch input {
   cursor: text;
   width: 10rem;
   height: 2rem;
@@ -110,13 +110,37 @@ body {
   background-size: auto;
   background-size: 1rem;
 }
-.container .navBar .navItem {
+.container .navBar .navInnerRight .navItem {
   position: relative;
   display: inline-block;
   margin-left: 1.5rem;
   line-height: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.container .navBar .dropdown-wrapper .dropdown-title {
+.container .navBar .navInnerRight .navItem .dropdown-wrapper .nav-dropdown {
+  position: absolute;
+  border: 1px solid #eaecef;
+  background: #FFFFFF;
+  border-radius: 1em;
+  padding: 0.3em;
+  margin-top: 0.5em;
+  margin-left: -0.5em;
+  width: 80px;
+  max-height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+}
+.container .navBar .navInnerRight .navItem .dropdown-wrapper .nav-dropdown a {
+  text-decoration: none;
+  color: #1b1f23;
+}
+.container .navBar .navInnerRight .navItem .dropdown-wrapper .dropdown-title {
   display: block;
   font-size: 0.9rem;
   font-family: inherit;
@@ -127,8 +151,13 @@ body {
   border: none;
   font-weight: 500;
   color: #2c3e50;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  outline: none;
 }
-.container .navBar .dropdown-wrapper .dropdown-title .arrow {
+.container .navBar .navInnerRight .navItem .dropdown-wrapper .dropdown-title .arrow {
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   border-top: 6px solid #ccc;

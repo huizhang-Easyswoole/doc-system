@@ -51,121 +51,156 @@ body {
             top: 0.7rem;
             display: -webkit-box;
             display: flex;
-        }
 
-        .navSearch {
-            display: inline-block;
-            position: relative;
-            margin-right: 1rem;
+            .navSearch {
+                display: inline-block;
+                position: relative;
+                margin-right: 1rem;
 
-            .resultList {
+                .resultList {
 
-                position: absolute;
-                border: 1px solid #eaecef;
-                background: #FFFFFF;
-                border-radius: 1em;
-                padding: .6em;
-                margin-top: 0.2em;
-                width: 300px;
-                max-height: 500px;
-                overflow-y: scroll;
+                    position: absolute;
+                    border: 1px solid #eaecef;
+                    background: #FFFFFF;
+                    border-radius: 1em;
+                    padding: .6em;
+                    margin-top: 0.2em;
+                    width: 300px;
+                    max-height: 500px;
+                    overflow-y: scroll;
 
-                .resultItem {
+                    .resultItem {
 
-                    padding: .4em;
-                    border-radius: .3em;
-                    border-bottom: 1px dashed #eeeeee;
+                        padding: .4em;
+                        border-radius: .3em;
+                        border-bottom: 1px dashed #eeeeee;
 
-                    &:last-child{
-                        border-bottom: none;
-                    }
-
-                    &:hover {
-                        background: #eeeeee;
-                    }
-
-                    .resultLink {
-
-                        display: block;
-                        text-decoration: none;
-                        line-height: 1.5em;
-
-                        .resultTitle {
-                            color: #1b1f23;
-                            font-weight: 700;
-                            font-size: 1em;
+                        &:last-child {
+                            border-bottom: none;
                         }
 
-                        .resultDesc {
-                            color: #3d454d;
-                            font-weight: 400;
-                            font-size: .9em;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
-                            overflow: hidden;
-                            -webkit-line-clamp:1;
+                        &:hover {
+                            background: #eeeeee;
+                        }
+
+                        .resultLink {
+
+                            display: block;
+                            text-decoration: none;
+                            line-height: 1.5em;
+
+                            .resultTitle {
+                                color: #1b1f23;
+                                font-weight: 700;
+                                font-size: 1em;
+                            }
+
+                            .resultDesc {
+                                color: #3d454d;
+                                font-weight: 400;
+                                font-size: .9em;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                -webkit-line-clamp: 1;
 
 
-                            .searchKeyword {
-                                color: #ff0561;
+                                .searchKeyword {
+                                    color: #ff0561;
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            input {
-                cursor: text;
-                width: 10rem;
-                height: 2rem;
-                color: #4e6e8e;
-                display: inline-block;
-                border: 1px solid #cfd4db;
-                border-radius: 2rem;
-                font-size: 0.9rem;
-                line-height: 2rem;
-                padding: 0 0.5rem 0 2rem;
-                outline: none;
-                -webkit-transition: all 0.2s ease;
-                transition: all 0.2s ease;
-                background: #fff url(/Images/docNavSearchLogo.svg) 0.6rem 0.5rem no-repeat;
-                background-size: auto;
-                background-size: 1rem;
-            }
-        }
-
-        .navItem {
-            position: relative;
-            display: inline-block;
-            margin-left: 1.5rem;
-            line-height: 2rem;
-        }
-
-        .dropdown-wrapper {
-            .dropdown-title {
-                display: block;
-                font-size: 0.9rem;
-                font-family: inherit;
-                cursor: inherit;
-                padding: inherit;
-                line-height: 1.4rem;
-                background: transparent;
-                border: none;
-                font-weight: 500;
-                color: #2c3e50;
-
-                .arrow {
-                    border-left: 4px solid transparent;
-                    border-right: 4px solid transparent;
-                    border-top: 6px solid #ccc;
-                    border-bottom: 0;
-                    vertical-align: middle;
-                    margin-top: -1px;
-                    margin-left: 0.4rem;
+                input {
+                    cursor: text;
+                    width: 10rem;
+                    height: 2rem;
+                    color: #4e6e8e;
+                    display: inline-block;
+                    border: 1px solid #cfd4db;
+                    border-radius: 2rem;
+                    font-size: 0.9rem;
+                    line-height: 2rem;
+                    padding: 0 0.5rem 0 2rem;
+                    outline: none;
+                    -webkit-transition: all 0.2s ease;
+                    transition: all 0.2s ease;
+                    background: #fff url(/Images/docNavSearchLogo.svg) 0.6rem 0.5rem no-repeat;
+                    background-size: auto;
+                    background-size: 1rem;
                 }
             }
-        }
 
+            .navItem {
+                position: relative;
+                display: inline-block;
+                margin-left: 1.5rem;
+                line-height: 2rem;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                .dropdown-wrapper {
+
+                    .nav-dropdown {
+                        position: absolute;
+                        border: 1px solid #eaecef;
+                        background: #FFFFFF;
+                        border-radius: 1em;
+                        padding: .3em;
+                        margin-top: 0.5em;
+                        margin-left: -0.5em;
+                        width: 80px;
+                        max-height: 80px;
+
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        list-style: none;
+
+                        a {
+                            text-decoration: none;
+                            color: #1b1f23;
+                        }
+                    }
+
+                    .dropdown-title {
+                        display: block;
+                        font-size: 0.9rem;
+                        font-family: inherit;
+                        cursor: inherit;
+                        padding: inherit;
+                        line-height: 1.4rem;
+                        background: transparent;
+                        border: none;
+                        font-weight: 500;
+                        color: #2c3e50;
+
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        outline: none;
+
+                        .arrow {
+                            border-left: 4px solid transparent;
+                            border-right: 4px solid transparent;
+                            border-top: 6px solid #ccc;
+                            border-bottom: 0;
+                            vertical-align: middle;
+                            margin-top: -1px;
+                            margin-left: 0.4rem;
+                        }
+                    }
+                }
+
+            }
+        }
     }
 
     // 左侧导航区
