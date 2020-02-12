@@ -16,7 +16,25 @@
 <body>
 <div class="container">
     <header class="navBar">
-        <div class="navInner"><img src="/Images/docNavLogo.png" alt=""></div>
+        <div class="navInner">
+            <img src="/Images/docNavLogo.png" alt="">
+            <div class="navInnerRight">
+                <div class="navSearch">
+                    <input aria-label="Search" autocomplete="off" spellcheck="false" class="" placeholder="">
+                </div>
+                <div class="navItem">
+                    <div class="dropdown-wrapper">
+                        <button type="button" aria-label="Select language" class="dropdown-title">
+                            <span class="title">Language</span> <span class="arrow right"></span>
+                        </button>
+                        <ul class="nav-dropdown" style="display: none;">
+                            <li class="dropdown-item"><!----> <a href="/" class="nav-link router-link-exact-active router-link-active">简体中文</a></li>
+                            <li class="dropdown-item"><!----> <a href="/En/" class="nav-link">ENGLISH</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
     <aside class="sideBar">{$sidebar}</aside>
     <section class="mainContent">

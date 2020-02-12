@@ -73,4 +73,9 @@ class Index extends Controller
             $this->response()->withStatus(Status::CODE_NOT_FOUND);
         }
     }
+
+    function keyWorldSearch()
+    {
+
+    }
 }
