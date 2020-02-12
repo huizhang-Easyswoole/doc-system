@@ -11,6 +11,8 @@
     - [基础部分](/Video/base.md)
     - [HTTP部分](/Video/http.md)
     - [数据库部分](/Video/database.md)
+    - ORM系列教程
+        - 教程1
     - [其他额外部分](/Video/other.md)
     - [视频教程模板](/Video/template.md)
 - 快速开始
